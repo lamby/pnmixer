@@ -7,6 +7,8 @@ AM_INIT_AUTOMAKE([foreign])
 AM_MAINTAINER_MODE
 AC_CONFIG_HEADERS([src/config.h])
 
+AM_CONDITIONAL([WITH_SOURCE_DATE_EPOCH], [test "$SOURCE_DATE_EPOCH" != ""])
+
 # ===================================================== #
 #                  Basic compiler settings              #
 # ===================================================== #

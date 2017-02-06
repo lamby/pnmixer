@@ -1,5 +1,10 @@
 .0.1:
-	@sed -e "s/!VERSION!/@PACKAGE_VERSION@/g" -e "s/!DATE!/`date '+%B %Y'`/g" < $*.0 > $@
+	@sed -e "s/!VERSION!/@PACKAGE_VERSION@/g" < $*.0 > $@
+if WITH_SOURCE_DATE_EPOCH
+	@sed -e "s/!DATE!/`LC_ALL=C date --utc --date="@$(SOURCE_DATE_EPOCH)" '+%B %Y'`/g" < $*.0 > $@
+else
+	@sed -e "s/!DATE!/`date '+%B %Y'`/g" < $*.0 > $@
+endif
 	@echo Built $*.1 from template
 
 manpages_in_files = $(wildcard *.0)
